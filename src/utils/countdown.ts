@@ -1,8 +1,15 @@
-import { COUNTDOWN_COMPLETION_MESSAGE } from "../config"
+import { COUNTDOWN_COMPLETION_MESSAGE } from "./../config/constants"
+
+type CountdownElements = {
+  daysEl: HTMLElement
+  hoursEl: HTMLElement
+  minutesEl: HTMLElement
+  secondsEl: HTMLElement
+}
 
 export function startCountdown(
   targetDate: Date,
-  element: HTMLElement,
+  elements: CountdownElements,
   onComplete?: () => void
 ) {
   const update = () => {
@@ -10,7 +17,10 @@ export function startCountdown(
     const diff = targetDate.getTime() - now.getTime()
 
     if (diff <= 0) {
-      element.textContent = COUNTDOWN_COMPLETION_MESSAGE // 👈 custom message here
+      elements.daysEl.textContent = COUNTDOWN_COMPLETION_MESSAGE
+      elements.hoursEl.textContent = ""
+      elements.minutesEl.textContent = ""
+      elements.secondsEl.textContent = ""
       clearInterval(timer)
       onComplete?.()
       return
@@ -21,9 +31,12 @@ export function startCountdown(
     const minutes = Math.floor((diff / (1000 * 60)) % 60)
     const seconds = Math.floor((diff / 1000) % 60)
 
-    element.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`
+    elements.daysEl.textContent = String(days).padStart(2, "0")
+    elements.hoursEl.textContent = String(hours).padStart(2, "0")
+    elements.minutesEl.textContent = String(minutes).padStart(2, "0")
+    elements.secondsEl.textContent = String(seconds).padStart(2, "0")
   }
 
-  update() // Run immediately
+  update()
   const timer = setInterval(update, 1000)
 }

@@ -11,6 +11,11 @@ export const COUNTDOWN_ELEMENT_ID = "countdown"
 export const COUNTDOWN_TIMER_INITIAL_MESSAGE = "Loading timer..."
 
 /**
+ * Initial placeholder text shown before the countdown starts updating.
+ */
+export const COUNTDOWN_TIMER_HEADING = "RE:GEN CAMP 2025"
+
+/**
  * Console log message for when the countdown completes.
  */
 export const COUNTDOWN_FINISHED_LOG_MESSAGE = "Countdown finished!"
