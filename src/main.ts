@@ -38,6 +38,7 @@ if (app) {
     digit.textContent = "00"
 
     const unit = document.createElement("div")
+    unit.id = `${id}-unit`
     unit.className = "wrapper__countdown__unit | text-2xl font-semibold"
     unit.textContent = label
 
@@ -80,6 +81,8 @@ if (app) {
     { daysEl, hoursEl, minutesEl, secondsEl },
     () => {
       daysEl.textContent = COUNTDOWN_COMPLETION_MESSAGE
+      daysEl.classList.add("flash")
+
       hoursEl.textContent = ""
       minutesEl.textContent = ""
       secondsEl.textContent = ""

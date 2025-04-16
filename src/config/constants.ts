@@ -30,3 +30,9 @@ export const COUNTDOWN_TARGET = new Date("2025-08-12T17:00:00")
  * Message to display when the countdown reaches the target date.
  */
 export const COUNTDOWN_COMPLETION_MESSAGE = "Camp has started!!!"
+
+/**
+ * Time (in milliseconds) before the countdown ends when flashing should start.
+ * Example: 10000 = start flashing during the last 10 seconds.
+ */
+export const COUNTDOWN_FLASH_THRESHOLD_MS = 10000
