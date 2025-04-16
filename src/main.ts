@@ -1,24 +1,26 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+const countdownEl = document.getElementById("countdown") as HTMLElement
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// 🎯 Set your target date here
+const targetDate = new Date("2025-08-12T17:00:00")
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+function updateCountdown() {
+  const now = new Date()
+  const diff = targetDate.getTime() - now.getTime()
+
+  if (diff <= 0) {
+    countdownEl.textContent = "Time's up!"
+    clearInterval(timer)
+    return
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24)
+  const minutes = Math.floor((diff / (1000 * 60)) % 60)
+  const seconds = Math.floor((diff / 1000) % 60)
+
+  countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`
+}
+
+// 🔁 Update every second
+updateCountdown()
+const timer = setInterval(updateCountdown, 1000)
